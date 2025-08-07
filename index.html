@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Time Capsule</title>
+  <style>
+    body {
+      background: linear-gradient(to top right, #ffecd2 0%, #fcb69f 100%);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      max-width: 500px;
+      height: 100px;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      resize: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 25px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #e17055;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #d35400;
+    }
+
+    .memory {
+      margin-top: 30px;
+      background: #fff;
+      color: #2c3e50;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 500px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .fade-in {
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🕰 Time Capsule</h1>
+  <p>Write about your day, and we'll show you what "you did" exactly one year ago!</p>
+
+  <textarea id="todayInput" placeholder="What did you do today?"></textarea><br>
+  <button onclick="generateMemory()">Open Time Capsule</button>
+
+  <div class="memory" id="memoryBox" style="display:none;"></div>
+
+  <script>
+    const fakeMemories = [
+      "You accidentally joined a yoga class thinking it was a food tasting event.",
+      "You binge-watched an entire season of your favorite show without regrets.",
+      "You wrote your future self a letter and forgot where you hid it.",
+      "You made a killer sandwich that no one believed you made.",
+      "You started learning guitar, played one chord, then took a nap.",
+      "You danced in your room like nobody was watching... but your pet was.",
+      "You Googled 'how to become a millionaire overnight'. Still waiting?",
+      "You tried to meditate but ended up planning dinner in your head.",
+      "You created a to-do list, and checked off 'create a to-do list'.",
+      "You dreamed of traveling to Mars. Still Earth-bound? Same."
+    ];
+
+    function generateMemory() {
+      const input = document.getElementById("todayInput").value.trim();
+      const memoryBox = document.getElementById("memoryBox");
+
+      if (input === "") {
+        alert("Please write something about your day first!");
+        return;
+      }
+
+      const randomMemory = fakeMemories[Math.floor(Math.random() * fakeMemories.length)];
+      memoryBox.innerHTML = `
+        <p><strong>Today:</strong> ${input}</p>
+        <hr>
+        <p><strong>1 Year Ago:</strong> ${randomMemory}</p>
+      `;
+      memoryBox.style.display = "block";
+      memoryBox.classList.add("fade-in");
+    }
+  </script>
+
+</body>
+</html>
